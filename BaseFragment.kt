@@ -28,14 +28,14 @@ abstract class BaseFragment<VB : ViewBinding>(
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = bindingInflater.invoke(inflater, container, false)
         rootView?.let {
             (it.parent as? ViewGroup)?.removeView(rootView)
-            return it
         } ?: run {
+            _binding = bindingInflater.invoke(layoutInflater, container, false)
             rootView = binding.root
-            return binding.root
         }
+
+        return rootView
     }
 
     /**
